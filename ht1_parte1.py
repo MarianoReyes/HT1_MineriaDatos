@@ -82,5 +82,9 @@ datos = pd.read_csv("baseball_reference_2016_scrape.csv")
 
 
 # 1.6
-datos = datos[datos.columns[0]].str.replace(",", "").str.replace("]", "").str.replace("]", "")
+datos[datos.columns[0]] = datos[datos.columns[0]
+                                ].str.replace(",", "").str.replace("]", "").str.replace("'", "")
+datos.drop("other_info_string", axis=1, inplace=True)
+datos["game_duration"] = datos["game_duration"].str.replace(": ", "")
+datos["venue"] = datos["venue"].str.replace(": ", "")
 datos.to_csv("new_file.csv", index=False)
