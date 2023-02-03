@@ -82,12 +82,5 @@ datos = pd.read_csv("baseball_reference_2016_scrape.csv")
 
 
 # 1.6
-
-datos = clean(datos, method="standardize")
-datos = clean(datos, method="duplicates")
-datos = clean(datos, method="replaceval",
-              # Si no se dan columnas, lo hace en todas
-              columns=['attendance'],
-              to_replace="]",  # Si no se da el valor que debe ser reemplazado, no cambia nada
-              value=" ")   # Si no se da el valor con que se reemplazará, utiliza el valor nulo
-datos.to_csv("clean_files.csv", index=False)
+datos = datos[datos.columns[0]].str.replace(",", "").str.replace("]", "").str.replace("]", "")
+datos.to_csv("new_file.csv", index=False)
